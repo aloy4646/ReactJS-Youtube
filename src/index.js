@@ -143,7 +143,7 @@ class App extends React.Component{
     }
 
     componentDidMount(){
-        this.onSearchSubmit("oi")
+        this.onSearchSubmit("pow patrol")
     }
 
     render() {

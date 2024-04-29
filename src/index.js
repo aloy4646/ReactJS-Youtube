@@ -8,7 +8,7 @@ const el = document.getElementById("root")
 const root = ReactDOM.createRoot(el)
 
 class SearchBar extends React.Component{
-    state = { term: "" }
+    state = { term: "kekeyi" }
 
     onFormSubmit = (event) => {
         event.preventDefault()
@@ -43,14 +43,15 @@ class VideoItem extends React.Component{
     render(){
         const video = this.props.video
         return (
-            <div onClick={this.handleClick}>
+            <div onClick={this.handleClick} style={{ display: 'flex', flexDirection: 'column' }}>
                 <img
                     className='image'
                     src={video.snippet.thumbnails.medium.url}
                     alt={video.snippet.title}
+                    style={{ width: '100%' }}
                 />
                 <div>
-                    <h3>{video.snippet.title}</h3>
+                    <h3 style={{ width: '100%' }}>{video.snippet.title}</h3>
                 </div>
             </div>
         )
@@ -62,11 +63,15 @@ class ListVideo extends React.Component{
     render(){
         const videos = this.props.videos.map(video => {
         return (
-                <VideoItem
-                    key={video.id.videoId}
-                    video={video}
-                    onSelectVideo={this.props.onSelectVideo}
-                />
+                <div>
+                    <VideoItem
+                        key={video.id.videoId}
+                        video={video}
+                        onSelectVideo={this.props.onSelectVideo}
+                    />
+                    <br></br>
+                    <br></br>
+                </div>
             )
         })
 
@@ -92,6 +97,13 @@ class DetailVideo extends React.Component {
                     <iframe 
                         title='video player' 
                         src={videoSrc} 
+                        style={{ 
+                            width: '100%',
+                            maxWidth: '856px', 
+                            height: 'calc(100vw * 9 / 16)',
+                            maxHeight: '480px'
+                        }}
+                        allowFullScreen
                     />
                 </div>
                 <div>
@@ -130,27 +142,37 @@ class App extends React.Component{
         })
     }
 
-    render(){
+    render() {
         return (
-            <div className="ui container" style={{ marginTop: "10px" }}>
+            <div className="ui container" style={{ marginTop: "10px"}}>
                 <SearchBar onSubmit={this.onSearchSubmit} />
-                {this.state.videos.length > 0 && (
-                    <div style={{ gridColumn: "2 / span 1", overflowY: "auto", maxHeight: "80vh" }}>
+                <div style={{ marginTop: "10px", display: "flex" }}>
+                    <div style={{ flex: "2", marginRight: "20px" }}>
+                    {this.state.videos.length > 0 && (
+                        <div>
                         {this.state.selectedVideo && (
                             <div>
-                                <DetailVideo
-                                    selectedVideo={this.state.selectedVideo}
-                                />
+                            <DetailVideo
+                                selectedVideo={this.state.selectedVideo}
+                            />
                             </div>
                         )}
-                        <ListVideo
-                            videos={this.state.videos}
-                        />
+                        </div>
+                    )}
                     </div>
-                )}
+                    
+                    <div style={{ flex: "1" }}>
+                    {this.state.videos.length > 0 && (
+                        <ListVideo
+                        videos={this.state.videos}
+                        onSelectVideo={this.setSelectedVideo}
+                        />
+                    )}
+                    </div>
+                </div>
             </div>
         )
-    }
+      }
 }
 
 root.render(<App />)

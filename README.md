@@ -1,3 +1,3 @@
-# GeeksFarm Bootcamp 22-23 April 2024
+# GeeksFarm Bootcamp 29 April 2024
 
-Pengenalan React.js
+Membuat tampilan seperti Youtube dengan ReactJS

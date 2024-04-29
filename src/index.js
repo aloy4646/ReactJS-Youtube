@@ -8,7 +8,7 @@ const el = document.getElementById("root")
 const root = ReactDOM.createRoot(el)
 
 class SearchBar extends React.Component{
-    state = { term: "kekeyi" }
+    state = { term: "" }
 
     onFormSubmit = (event) => {
         event.preventDefault()
@@ -43,7 +43,7 @@ class VideoItem extends React.Component{
     render(){
         const video = this.props.video
         return (
-            <div onClick={this.handleClick} style={{ display: 'flex', flexDirection: 'column' }}>
+            <div onClick={this.handleClick} style={{ display: 'flex', flexDirection: 'column' , cursor: 'pointer' }}>
                 <img
                     className='image'
                     src={video.snippet.thumbnails.medium.url}
@@ -140,6 +140,10 @@ class App extends React.Component{
                 console.log(this.state.selectedVideo.snippet.thumbnails.medium.url)
             })
         })
+    }
+
+    componentDidMount(){
+        this.onSearchSubmit("pow patrol")
     }
 
     render() {

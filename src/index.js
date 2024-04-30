@@ -43,15 +43,19 @@ class VideoItem extends React.Component{
     render(){
         const video = this.props.video
         return (
-            <div onClick={this.handleClick} style={{ display: 'flex', flexDirection: 'column' , cursor: 'pointer' }}>
-                <img
-                    className='image'
-                    src={video.snippet.thumbnails.medium.url}
-                    alt={video.snippet.title}
-                    style={{ width: '100%' }}
-                />
-                <div>
-                    <h3 style={{ width: '100%' }}>{video.snippet.title}</h3>
+            <div onClick={this.handleClick} style={{ cursor: 'pointer', marginBottom: '-5px'}}>
+                <div style={{ display: "flex" }}>
+                    <div style={{ flex: "1" }}>
+                        <img
+                            className='image'
+                            src={video.snippet.thumbnails.medium.url}
+                            alt={video.snippet.title}
+                            style={{ width: '100%' }}
+                        />
+                    </div>
+                    <div style={{ flex: "1"}}>
+                        <h4 style={{ width: '100%', marginLeft: '10px'}}>{video.snippet.title}</h4>
+                    </div>
                 </div>
             </div>
         )
@@ -61,7 +65,7 @@ class VideoItem extends React.Component{
 
 class ListVideo extends React.Component{
     render(){
-        const videos = this.props.videos.map(video => {
+        const videos = this.props.videos.map((video, index) => {
         return (
                 <div>
                     <VideoItem
@@ -69,8 +73,7 @@ class ListVideo extends React.Component{
                         video={video}
                         onSelectVideo={this.props.onSelectVideo}
                     />
-                    <br></br>
-                    <br></br>
+                    {index !== this.props.videos.length - 1 && <hr />}
                 </div>
             )
         })
@@ -93,14 +96,14 @@ class DetailVideo extends React.Component {
                         src={videoSrc} 
                         style={{ 
                             width: '100%',
-                            maxWidth: '856px', 
+                            maxWidth: '860px', 
                             height: 'calc(100vw * 9 / 16)',
                             maxHeight: '480px'
                         }}
                         allowFullScreen
                     />
                 </div>
-                <div>
+                <div style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '5px' }}>
                     <h2 className='header'>{this.props.selectedVideo.snippet.title}</h2>
                     <p>{this.props.selectedVideo.snippet.description}</p>
                 </div>
@@ -144,7 +147,7 @@ class App extends React.Component{
             <div className="ui container" style={{ marginTop: "10px"}}>
                 <SearchBar onSubmit={this.onSearchSubmit} />
                 <div style={{ marginTop: "10px", display: "flex" }}>
-                    <div style={{ flex: "2", marginRight: "20px" }}>
+                    <div style={{ flex: "2.5", marginRight: "20px" }}>
                     {this.state.videos.length > 0 && (
                         <div>
                         {this.state.selectedVideo && (

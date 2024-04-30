@@ -37,7 +37,7 @@ class SearchBar extends React.Component{
 
 class VideoItem extends React.Component{
     handleClick = () => {
-        this.props.onSelectVideo(this.props.video);
+        this.props.onSelectVideo(this.props.video)
     }
 
     render(){
@@ -82,12 +82,6 @@ class ListVideo extends React.Component{
 }
 
 class DetailVideo extends React.Component {
-    componentDidMount(){
-        if (!this.props.selectedVideo) {
-            return <div>Loading Videos...</div>
-        }
-    }
-	
     render(){
         const videoSrc = `https://www.youtube.com/embed/${this.props.selectedVideo.id.videoId}`
 
@@ -113,7 +107,6 @@ class DetailVideo extends React.Component {
             </div>
         )
     }
-	
 }
 
 class App extends React.Component{
@@ -168,8 +161,8 @@ class App extends React.Component{
                     <div style={{ flex: "1" }}>
                     {this.state.videos.length > 0 && (
                         <ListVideo
-                        videos={this.state.videos}
-                        onSelectVideo={this.setSelectedVideo}
+                            videos={this.state.videos}
+                            onSelectVideo={this.setSelectedVideo}
                         />
                     )}
                     </div>

@@ -151,23 +151,23 @@ class App extends React.Component{
                     {this.state.videos.length > 0 && (
                         <div>
                         {this.state.selectedVideo && (
-                            <div>
-                            <DetailVideo
-                                selectedVideo={this.state.selectedVideo}
-                            />
-                            </div>
-                        )}
+                                <div>
+                                <DetailVideo
+                                    selectedVideo={this.state.selectedVideo}
+                                />
+                                </div>
+                            )}
                         </div>
                     )}
                     </div>
                     
                     <div style={{ flex: "1" }}>
-                    {this.state.videos.length > 0 && (
-                        <ListVideo
-                            videos={this.state.videos}
-                            onSelectVideo={this.setSelectedVideo}
-                        />
-                    )}
+                        {this.state.videos.length > 0 && (
+                            <ListVideo
+                                videos={this.state.videos}
+                                onSelectVideo={this.setSelectedVideo}
+                            />
+                        )}
                     </div>
                 </div>
             </div>
